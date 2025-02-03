@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -18,5 +23,9 @@ public class Task {
     @Override
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + description;
+    }
+
+    public String toFileString() {
+        return (isDone ? "1" : "0") + " | " + description;
     }
 }
