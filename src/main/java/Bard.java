@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,7 +38,7 @@ public class Bard {
             if (deadlineParts.length < 2) {
                 throw new BardException("Error: 'deadline' requires a task description and a deadline.");
             }
-            task = new Deadline(deadlineParts[0], deadlineParts[1]);
+            task = new Deadline(deadlineParts[0], DateParser.parseDayDate(deadlineParts[1]));
         }
         else if (command.equals("event")) {
             String[] eventParts = parts.length > 1 ? parts[1].split(" /from | /to ", 3) : new String[0];
