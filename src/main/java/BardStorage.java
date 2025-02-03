@@ -16,7 +16,7 @@ public class BardStorage {
 
     private void createFileIfNotExists() {
         File file = new File(FILE_PATH);
-        System.out.println("Saving storage file to: " + file.getAbsolutePath());
+//        System.out.println("Saving storage file to: " + file.getAbsolutePath());
         File parentDir = file.getParentFile();
 
         try {
@@ -73,7 +73,7 @@ public class BardStorage {
             case "T":
                 return new Todo(description, isDone);
             case "D":
-                return new Deadline(description, parts[3], isDone);
+                return new Deadline(description, DateParser.parseDayDate(parts[3]), isDone);
             case "E":
                 return new Event(description, parts[3], isDone);
             default:
