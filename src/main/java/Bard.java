@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bard {
@@ -11,12 +12,10 @@ public class Bard {
     static String endingLine = horizontalLine +
             " Bye. Hope to see you again soon!\n" +
             horizontalLine;
-    private Task[] tasks;
-    private int taskCount;
+    private ArrayList<Task> tasks;
 
     public Bard() {
-        tasks = new Task[100];
-        taskCount = 0;
+        tasks = new ArrayList<>();
     }
 
     private void addTask(String taskString) throws BardException {
@@ -46,39 +45,50 @@ public class Bard {
             task = new Event(eventParts[0], eventParts[1], eventParts[2]);
         }
 
-        tasks[taskCount++] = task;
+        tasks.add(task);
 
         System.out.println(horizontalLine + " Added: " + task + "\n"
-                + " Now you have " + taskCount + " tasks in the list." + "\n" + horizontalLine);
+                + " Now you have " + tasks.size() + " tasks in the list." + "\n" + horizontalLine);
     }
 
     private String listTasks() {
         StringBuilder taskList = new StringBuilder();
-        for (int i = 0; i < tasks.length; i++) {
-            if (tasks[i] == null) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i) == null) {
                 break;
             }
-            taskList.append((i + 1)).append(". ").append(tasks[i]).append("\n");
+            taskList.append((i + 1)).append(". ").append(tasks.get(i)).append("\n");
         }
         return taskList.toString();
     }
 
     private void markTaskAsDone(int taskNumber) throws BardException {
-        if (taskNumber < 1 || taskNumber > tasks.length || tasks[taskNumber - 1] == null) {
+        if (taskNumber < 1 || taskNumber > tasks.size() || tasks.get(taskNumber - 1) == null) {
             throw new BardException("Error: Invalid task number");
         }
-        tasks[taskNumber - 1].markAsDone();
+        tasks.get(taskNumber - 1).markAsDone();
         System.out.println(horizontalLine + " Nice! I've marked this task as done:\n"
-                + tasks[taskNumber - 1] + "\n" + horizontalLine);
+                + tasks.get(taskNumber - 1) + "\n" + horizontalLine);
     }
 
     private void unmarkTaskAsDone(int taskNumber) throws BardException {
-        if (taskNumber < 1 || taskNumber > tasks.length || tasks[taskNumber - 1] == null) {
+        if (taskNumber < 1 || taskNumber > tasks.size() || tasks.get(taskNumber - 1) == null) {
             throw new BardException("Error: Invalid task number");
         }
-        tasks[taskNumber - 1].unmarkAsDone();
+        tasks.get(taskNumber - 1).unmarkAsDone();
         System.out.println(horizontalLine + " Okay, I've marked this task as not done yet:\n"
-                + tasks[taskNumber - 1] + "\n" + horizontalLine);
+                + tasks.get(taskNumber - 1) + "\n" + horizontalLine);
+    }
+
+    private void deleteTask(int taskNumber) throws BardException {
+        if (taskNumber < 1 || taskNumber > tasks.size() || tasks.get(taskNumber - 1) == null) {
+            throw new BardException("Error: Invalid task number");
+        }
+        System.out.println(horizontalLine + " Noted. I've removed this task:\n"
+                + tasks.get(taskNumber - 1));
+        tasks.remove(taskNumber - 1);
+        System.out.println(" Now you have " + tasks.size()
+                + " tasks in the list." + "\n" + horizontalLine);
     }
 
     public void run() {
@@ -91,25 +101,27 @@ public class Bard {
             boolean wasHandled = false;
             switch (parts[0]) {
                 case "mark":
-                    if (parts.length != 2) {
-                        break;
-                    }
                     try {
                         markTaskAsDone(Integer.parseInt(parts[1]));
                         wasHandled = true;
                     } catch (NumberFormatException | BardException e) {
-                        // Do nothing, will fall to add task
+                        System.out.println(e);
                     }
                     break;
                 case "unmark":
-                    if (parts.length != 2) {
-                        break;
-                    }
                     try {
                         unmarkTaskAsDone(Integer.parseInt(parts[1]));
                         wasHandled = true;
                     } catch (NumberFormatException | BardException e) {
-                        // Do nothing, will fall to add task
+                        System.out.println(e);
+                    }
+                    break;
+                case "delete":
+                    try {
+                        deleteTask(Integer.parseInt(parts[1]));
+                        wasHandled = true;
+                    } catch (NumberFormatException | BardException e) {
+                        System.out.println(e);
                     }
                     break;
                 case "list":
