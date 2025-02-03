@@ -19,7 +19,7 @@ public class Bard {
         taskCount = 0;
     }
 
-    private void addTask(String taskString) {
+    private void addTask(String taskString) throws BardException {
         String[] parts = taskString.split(" ", 2);
         String command = parts[0];
 
@@ -27,24 +27,21 @@ public class Bard {
 
         if (command.equals("todo")) {
             if (parts.length < 2) {
-                System.out.println("Error: 'todo' requires a description.");
-                return;
+                throw new BardException("Error: 'todo' requires a task description.");
             }
             task = new Todo(parts[1]);
         }
         else if (command.equals("deadline")) {
             String[] deadlineParts = parts.length > 1 ? parts[1].split(" /by ", 2) : new String[0];
             if (deadlineParts.length < 2) {
-                System.out.println("Error: 'deadline' requires a task description and a /by time.");
-                return;
+                throw new BardException("Error: 'deadline' requires a task description and a deadline.");
             }
             task = new Deadline(deadlineParts[0], deadlineParts[1]);
         }
         else if (command.equals("event")) {
             String[] eventParts = parts.length > 1 ? parts[1].split(" /from | /to ", 3) : new String[0];
             if (eventParts.length < 3) {
-                System.out.println("Error: 'event' requires a task description, /from time, and /to time.");
-                return;
+                throw new BardException("Error: 'event' requires a task description and a time range.");
             }
             task = new Event(eventParts[0], eventParts[1], eventParts[2]);
         }
@@ -66,20 +63,18 @@ public class Bard {
         return taskList.toString();
     }
 
-    private void markTaskAsDone(int taskNumber) {
+    private void markTaskAsDone(int taskNumber) throws BardException {
         if (taskNumber < 1 || taskNumber > tasks.length || tasks[taskNumber - 1] == null) {
-            System.out.println(horizontalLine + " Invalid task number\n" + horizontalLine);
-            return;
+            throw new BardException("Error: Invalid task number");
         }
         tasks[taskNumber - 1].markAsDone();
         System.out.println(horizontalLine + " Nice! I've marked this task as done:\n"
                 + tasks[taskNumber - 1] + "\n" + horizontalLine);
     }
 
-    private void unmarkTaskAsDone(int taskNumber) {
+    private void unmarkTaskAsDone(int taskNumber) throws BardException {
         if (taskNumber < 1 || taskNumber > tasks.length || tasks[taskNumber - 1] == null) {
-            System.out.println(horizontalLine + " Invalid task number\n" + horizontalLine);
-            return;
+            throw new BardException("Error: Invalid task number");
         }
         tasks[taskNumber - 1].unmarkAsDone();
         System.out.println(horizontalLine + " Okay, I've marked this task as not done yet:\n"
@@ -102,7 +97,7 @@ public class Bard {
                     try {
                         markTaskAsDone(Integer.parseInt(parts[1]));
                         wasHandled = true;
-                    } catch (NumberFormatException e) {
+                    } catch (NumberFormatException | BardException e) {
                         // Do nothing, will fall to add task
                     }
                     break;
@@ -113,7 +108,7 @@ public class Bard {
                     try {
                         unmarkTaskAsDone(Integer.parseInt(parts[1]));
                         wasHandled = true;
-                    } catch (NumberFormatException e) {
+                    } catch (NumberFormatException | BardException e) {
                         // Do nothing, will fall to add task
                     }
                     break;
@@ -127,7 +122,11 @@ public class Bard {
                 case "deadline":
                 case "event":
                     wasHandled = true;
-                    addTask(input);
+                    try {
+                        addTask(input);
+                    } catch (BardException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "bye":
                     wasHandled = true;
@@ -136,17 +135,18 @@ public class Bard {
                 default:
                     wasHandled = true;
                     System.out.println(horizontalLine
-                            + input + "\n" + horizontalLine);
+                            + " Sorry, I don't know what that means.\n" + horizontalLine);
                     break;
             }
 
             if (!wasHandled && !input.isBlank()) {
-                addTask(input);
+                System.out.println(horizontalLine
+                        + " Sorry, I don't know what that means.\n" + horizontalLine);
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Bard bard = new Bard();
         bard.run();
     }
