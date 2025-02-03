@@ -13,9 +13,11 @@ public class Bard {
             " Bye. Hope to see you again soon!\n" +
             horizontalLine;
     private ArrayList<Task> tasks;
+    private BardStorage storage;
 
     public Bard() {
         tasks = new ArrayList<>();
+        storage = new BardStorage();
     }
 
     private void addTask(String taskString) throws BardException {
@@ -98,12 +100,12 @@ public class Bard {
             String input = scanner.nextLine();
             String[] parts = input.split(" ");
 
-            boolean wasHandled = false;
+            boolean wasChanged = false;
             switch (parts[0]) {
                 case "mark":
                     try {
                         markTaskAsDone(Integer.parseInt(parts[1]));
-                        wasHandled = true;
+                        wasChanged = true;
                     } catch (NumberFormatException | BardException e) {
                         System.out.println(e);
                     }
@@ -111,7 +113,7 @@ public class Bard {
                 case "unmark":
                     try {
                         unmarkTaskAsDone(Integer.parseInt(parts[1]));
-                        wasHandled = true;
+                        wasChanged = true;
                     } catch (NumberFormatException | BardException e) {
                         System.out.println(e);
                     }
@@ -119,13 +121,12 @@ public class Bard {
                 case "delete":
                     try {
                         deleteTask(Integer.parseInt(parts[1]));
-                        wasHandled = true;
+                        wasChanged = true;
                     } catch (NumberFormatException | BardException e) {
                         System.out.println(e);
                     }
                     break;
                 case "list":
-                    wasHandled = true;
                     System.out.println(horizontalLine
                             + " Here are the tasks in your list:\n" + listTasks()
                             + horizontalLine);
@@ -133,7 +134,7 @@ public class Bard {
                 case "todo":
                 case "deadline":
                 case "event":
-                    wasHandled = true;
+                    wasChanged = true;
                     try {
                         addTask(input);
                     } catch (BardException e) {
@@ -141,19 +142,16 @@ public class Bard {
                     }
                     break;
                 case "bye":
-                    wasHandled = true;
                     System.out.println(endingLine);
                     return;
                 default:
-                    wasHandled = true;
                     System.out.println(horizontalLine
                             + " Sorry, I don't know what that means.\n" + horizontalLine);
                     break;
             }
 
-            if (!wasHandled && !input.isBlank()) {
-                System.out.println(horizontalLine
-                        + " Sorry, I don't know what that means.\n" + horizontalLine);
+            if (wasChanged) {
+                storage.saveTasks(tasks);
             }
         }
     }
