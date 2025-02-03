@@ -12,19 +12,47 @@ public class Bard {
             " Bye. Hope to see you again soon!\n" +
             horizontalLine;
     private Task[] tasks;
+    private int taskCount;
 
     public Bard() {
         tasks = new Task[100];
+        taskCount = 0;
     }
 
-    private void addTask(String task) {
-        for (int i = 0; i < tasks.length; i++) {
-            if (tasks[i] == null) {
-                tasks[i] = new Task(task);
-                break;
+    private void addTask(String taskString) {
+        String[] parts = taskString.split(" ", 2);
+        String command = parts[0];
+
+        Task task = null;
+
+        if (command.equals("todo")) {
+            if (parts.length < 2) {
+                System.out.println("Error: 'todo' requires a description.");
+                return;
             }
+            task = new Todo(parts[1]);
         }
-        System.out.println(horizontalLine + " Added: " + task + "\n" + horizontalLine);
+        else if (command.equals("deadline")) {
+            String[] deadlineParts = parts.length > 1 ? parts[1].split(" /by ", 2) : new String[0];
+            if (deadlineParts.length < 2) {
+                System.out.println("Error: 'deadline' requires a task description and a /by time.");
+                return;
+            }
+            task = new Deadline(deadlineParts[0], deadlineParts[1]);
+        }
+        else if (command.equals("event")) {
+            String[] eventParts = parts.length > 1 ? parts[1].split(" /from | /to ", 3) : new String[0];
+            if (eventParts.length < 3) {
+                System.out.println("Error: 'event' requires a task description, /from time, and /to time.");
+                return;
+            }
+            task = new Event(eventParts[0], eventParts[1], eventParts[2]);
+        }
+
+        tasks[taskCount++] = task;
+
+        System.out.println(horizontalLine + " Added: " + task + "\n"
+                + " Now you have " + taskCount + " tasks in the list." + "\n" + horizontalLine);
     }
 
     private String listTasks() {
@@ -91,17 +119,28 @@ public class Bard {
                     break;
                 case "list":
                     wasHandled = true;
-                    System.out.println(horizontalLine + " Here are the tasks in your list:\n" + listTasks() + horizontalLine);
+                    System.out.println(horizontalLine
+                            + " Here are the tasks in your list:\n" + listTasks()
+                            + horizontalLine);
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    wasHandled = true;
+                    addTask(input);
                     break;
                 case "bye":
                     wasHandled = true;
                     System.out.println(endingLine);
                     return;
                 default:
+                    wasHandled = true;
+                    System.out.println(horizontalLine
+                            + input + "\n" + horizontalLine);
                     break;
             }
 
-            if (!wasHandled) {
+            if (!wasHandled && !input.isBlank()) {
                 addTask(input);
             }
         }
