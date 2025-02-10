@@ -1,3 +1,7 @@
+package bard.exception;
+
+import bard.ui.Ui;
+
 public class BardException extends Exception {
     public BardException(String message) {
         super(message);

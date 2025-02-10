@@ -1,3 +1,11 @@
+package bard.command;
+
+import bard.exception.BardException;
+import bard.storage.Storage;
+import bard.task.Task;
+import bard.task.TaskList;
+import bard.ui.Ui;
+
 public class AddCommand extends Command {
     private Task task;
 

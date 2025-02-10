@@ -1,4 +1,11 @@
-import java.util.Scanner;
+package bard;
+
+import bard.command.Command;
+import bard.exception.BardException;
+import bard.parser.CommandParser;
+import bard.storage.Storage;
+import bard.task.TaskList;
+import bard.ui.Ui;
 
 public class Bard {
 

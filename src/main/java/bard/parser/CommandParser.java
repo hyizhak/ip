@@ -1,3 +1,12 @@
+package bard.parser;
+
+import bard.command.*;
+import bard.exception.BardException;
+import bard.task.Deadline;
+import bard.task.Event;
+import bard.task.Task;
+import bard.task.Todo;
+
 public class CommandParser {
 
     public static Command parse(String fullCommand) throws BardException {

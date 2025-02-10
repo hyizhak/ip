@@ -1,3 +1,8 @@
+package bard.task;
+
+import bard.exception.BardException;
+import bard.task.Task;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -19,7 +24,7 @@ public class TaskList implements Iterable<Task> {
 
     public Task getTask(int index) throws BardException {
         if (index < 0 || index >= tasks.size()) {
-            throw new BardException("Error: Task number out of range.");
+            throw new BardException("Error: bard.task.Task number out of range.");
         }
         return tasks.get(index);
     }
@@ -38,7 +43,7 @@ public class TaskList implements Iterable<Task> {
 
     public Task markTaskAsDone(int taskNumber) throws BardException {
         if (taskNumber < 1 || taskNumber >= tasks.size() + 1) {
-            throw new BardException("Error: Task number out of range.");
+            throw new BardException("Error: bard.task.Task number out of range.");
         }
         tasks.get(taskNumber - 1).markAsDone();
         return tasks.get(taskNumber - 1);
@@ -46,7 +51,7 @@ public class TaskList implements Iterable<Task> {
 
     public Task unmarkTaskAsDone(int taskNumber) throws BardException {
         if (taskNumber < 1 || taskNumber >= tasks.size() + 1) {
-            throw new BardException("Error: Task number out of range.");
+            throw new BardException("Error: bard.task.Task number out of range.");
         }
         tasks.get(taskNumber - 1).unmarkAsDone();
         return tasks.get(taskNumber - 1);
@@ -54,7 +59,7 @@ public class TaskList implements Iterable<Task> {
 
     public Task deleteTask(int taskNumber) throws BardException {
         if (taskNumber < 1 || taskNumber >= tasks.size() + 1) {
-            throw new BardException("Error: Task number out of range.");
+            throw new BardException("Error: bard.task.Task number out of range.");
         }
         Task task = tasks.remove(taskNumber - 1);
         return task;
