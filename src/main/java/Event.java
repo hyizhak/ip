@@ -1,32 +1,29 @@
-public class Event extends Task {
-    protected String from;
-    protected String to;
+import java.time.LocalDateTime;
 
-    public Event(String description, String from, String to) {
+public class Event extends Task {
+    protected LocalDateTime from;
+    protected LocalDateTime to;
+
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
-    public Event(String description, String from, String to, boolean isDone) {
+    public Event(String description, LocalDateTime from, LocalDateTime to, boolean isDone) {
         super(description, isDone);
         this.from = from;
         this.to = to;
     }
 
-    public Event(String description, String fromTo, boolean isDone) {
-        super(description, isDone);
-        String[] fromToSplit = fromTo.split("-");
-        this.from = fromToSplit[0];
-        this.to = fromToSplit[1];
-    }
-
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(DateParser.OUTPUT_HOUR_FORMAT)
+                + " to: " + to.format(DateParser.OUTPUT_HOUR_FORMAT) + ")";
     }
 
     public String toFileString() {
-        return "E | " + super.toFileString() + " | " + from + "-" + to;
+        return "E | " + super.toFileString() + " | " + from.format(DateParser.INPUT_HOUR_FORMAT)
+                + " - " + to.format(DateParser.INPUT_HOUR_FORMAT);
     }
 }
