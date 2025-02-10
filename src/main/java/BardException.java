@@ -5,6 +5,6 @@ public class BardException extends Exception {
 
     @Override
     public String toString() {
-        return Bard.horizontalLine + getMessage() + "\n" + Bard.horizontalLine;
+        return Ui.horizontalLine + getMessage() + "\n" + Ui.horizontalLine;
     }
 }

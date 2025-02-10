@@ -4,55 +4,56 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Added: [T][ ] borrow book
+ Got it. I've added this task:
+   [T][ ] borrow book
  Now you have 1 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
- Added: [D][ ] return book (by: Sunday)
+ Got it. I've added this task:
+   [D][ ] return book (by: Oct 15 2019, 12:00 PM)
  Now you have 2 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
- Added: [E][ ] project meeting (from: Mon 2pm to: 4pm)
+ Got it. I've added this task:
+   [E][ ] project meeting (from: Feb 17 2025, 2:00 PM to: Feb 17 2025, 4:00 PM)
  Now you have 3 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
  Nice! I've marked this task as done:
-[T][X] borrow book
+   [T][X] borrow book
 ____________________________________________________________
 
 ____________________________________________________________
  Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
+   [D][X] return book (by: Oct 15 2019, 12:00 PM)
 ____________________________________________________________
 
 ____________________________________________________________
- Okay, I've marked this task as not done yet:
-[D][ ] return book (by: Sunday)
+ Okay, I've unmarked this task as done:
+   [D][ ] return book (by: Oct 15 2019, 12:00 PM)
 ____________________________________________________________
 
 ____________________________________________________________
- Here are the tasks in your list:
 1. [T][X] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+2. [D][ ] return book (by: Oct 15 2019, 12:00 PM)
+3. [E][ ] project meeting (from: Feb 17 2025, 2:00 PM to: Feb 17 2025, 4:00 PM)
 ____________________________________________________________
 
 ____________________________________________________________
  Noted. I've removed this task:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
+   [E][ ] project meeting (from: Feb 17 2025, 2:00 PM to: Feb 17 2025, 4:00 PM)
  Now you have 2 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
- Here are the tasks in your list:
 1. [T][X] borrow book
-2. [D][ ] return book (by: Sunday)
+2. [D][ ] return book (by: Oct 15 2019, 12:00 PM)
 ____________________________________________________________
 
 ____________________________________________________________
- Bye. Hope to see you again soon!
+Bye. Hope to see you again soon!
 ____________________________________________________________
 

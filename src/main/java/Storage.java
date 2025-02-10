@@ -7,10 +7,10 @@ import java.io.BufferedWriter;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class BardStorage {
+public class Storage {
     private static final String FILE_PATH = Path.of("data", "tasks.txt").toString();
 
-    public BardStorage() {
+    public Storage() {
         createFileIfNotExists();
     }
 
@@ -32,7 +32,7 @@ public class BardStorage {
     }
 
     /** Loads tasks from the file into memory */
-    public ArrayList<Task> loadTasks() {
+    public TaskList load() throws BardException {
         ArrayList<Task> tasks = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
@@ -43,18 +43,27 @@ public class BardStorage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
+            throw new BardException("Error reading from file: " + e.getMessage());
         }
-        return tasks;
+        return new TaskList(tasks);
     }
 
     /** Saves all tasks to the file */
-    public void saveTasks(ArrayList<Task> tasks) {
+    public void save(TaskList tasks) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Task task : tasks) {
                 bw.write(task.toFileString());
                 bw.newLine();
             }
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
+    }
+
+    public void save(Task task) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+            bw.write(task.toFileString());
+            bw.newLine();
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }
@@ -73,9 +82,11 @@ public class BardStorage {
             case "T":
                 return new Todo(description, isDone);
             case "D":
-                return new Deadline(description, DateParser.parseDayDate(parts[3]), isDone);
+                return new Deadline(description, DateParser.parseHourDate(parts[3]), isDone);
             case "E":
-                return new Event(description, parts[3], isDone);
+                String[] eventParts = parts[3].split(" - ");
+                return new Event(description, DateParser.parseHourDate(eventParts[0]),
+                        DateParser.parseHourDate(eventParts[1]), isDone);
             default:
                 return null;
         }
