@@ -1,10 +1,12 @@
+package bard.ui;
+
 import java.util.Scanner;
 
 public class Ui {
-    static String horizontalLine = "____________________________________________________________\n";
+    public static String horizontalLine = "____________________________________________________________\n";
 
     static String startingLine = horizontalLine +
-            " Hello! I'm Bard\n" +
+            " Hello! I'm Bard.\n" +
             " What can I do for you?\n" +
             horizontalLine;
 

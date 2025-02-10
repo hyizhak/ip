@@ -1,3 +1,13 @@
+package bard.storage;
+
+import bard.exception.BardException;
+import bard.parser.DateParser;
+import bard.task.Deadline;
+import bard.task.Event;
+import bard.task.Task;
+import bard.task.Todo;
+import bard.task.TaskList;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileReader;
@@ -69,7 +79,7 @@ public class Storage {
         }
     }
 
-    /** Parses a line from the file into a Task object */
+    /** Parses a line from the file into a bard.task.Task object */
     private Task parseTask(String line) {
         String[] parts = line.split(" \\| ");
         if (parts.length < 3) return null;

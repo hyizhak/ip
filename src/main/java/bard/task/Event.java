@@ -1,3 +1,7 @@
+package bard.task;
+
+import bard.parser.DateParser;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {

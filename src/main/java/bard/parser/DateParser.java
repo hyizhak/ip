@@ -1,3 +1,5 @@
+package bard.parser;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,10 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DateParser {
-    static final DateTimeFormatter INPUT_HOUR_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    static final DateTimeFormatter INPUT_DAY_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    static final DateTimeFormatter OUTPUT_HOUR_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
-    static final DateTimeFormatter OUTPUT_DAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
+    public static final DateTimeFormatter INPUT_HOUR_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    public static final DateTimeFormatter INPUT_DAY_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter OUTPUT_HOUR_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+    public static final DateTimeFormatter OUTPUT_DAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public static LocalDateTime parseHourDate(String input) {
         String[] parts = input.split(" ");

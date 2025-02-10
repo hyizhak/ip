@@ -1,3 +1,9 @@
+package bard.command;
+
+import bard.storage.Storage;
+import bard.task.TaskList;
+import bard.ui.Ui;
+
 public class ExitCommand extends Command {
     public ExitCommand() {
     }
