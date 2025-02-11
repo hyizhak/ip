@@ -4,6 +4,7 @@ import bard.command.AddCommand;
 import bard.command.Command;
 import bard.command.DeleteCommand;
 import bard.command.ExitCommand;
+import bard.command.FindCommand;
 import bard.command.InvalidCommand;
 import bard.command.ListCommand;
 import bard.command.MarkCommand;
@@ -40,6 +41,8 @@ public class CommandParser {
             return new MarkCommand(Integer.parseInt(words[1]), true);
         case "unmark":
             return new MarkCommand(Integer.parseInt(words[1]), false);
+        case "find":
+            return new FindCommand(words[1]);
         default:
             return new InvalidCommand();
         }

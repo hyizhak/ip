@@ -64,6 +64,16 @@ public class TaskList implements Iterable<Task> {
         return task;
     }
 
+    public TaskList findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return new TaskList(matchingTasks);
+    }
+
     @Override
     public Iterator<Task> iterator() {
         return tasks.iterator();
