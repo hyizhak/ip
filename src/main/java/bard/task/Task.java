@@ -27,6 +27,11 @@ public class Task {
         return (isDone ? "[X] " : "[ ] ") + description;
     }
 
+    /**
+     * Returns the description of the task used in storage.
+     *
+     * @return Description of the task in storage format.
+     */
     public String toFileString() {
         return (isDone ? "1" : "0") + " | " + description;
     }

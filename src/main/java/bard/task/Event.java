@@ -8,6 +8,13 @@ public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description Description of event.
+     * @param from Start time of event.
+     * @param to End time of event.
+     */
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
