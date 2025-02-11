@@ -24,9 +24,7 @@ public class Bard {
         }
     }
 
-    /**
-     * Runs the Bard program.
-     */
+    /** Runs the Bard program. */
     public void run() {
         while (!ui.hasExited()) {
             String fullCommand = ui.readCommand();
@@ -40,7 +38,7 @@ public class Bard {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Bard bard = new Bard();
         bard.run();
     }

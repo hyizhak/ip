@@ -1,8 +1,8 @@
 package bard.task;
 
-import bard.parser.DateParser;
-
 import java.time.LocalDateTime;
+
+import bard.parser.DateParser;
 
 public class Event extends Task {
     protected LocalDateTime from;

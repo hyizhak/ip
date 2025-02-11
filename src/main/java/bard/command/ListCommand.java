@@ -5,8 +5,7 @@ import bard.task.TaskList;
 import bard.ui.Ui;
 
 public class ListCommand extends Command {
-    public ListCommand() {
-    }
+    public ListCommand() {}
 
     /**
      * Lists all tasks in the task list.

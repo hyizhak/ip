@@ -3,12 +3,11 @@ package bard.ui;
 import java.util.Scanner;
 
 public class Ui {
-    public static String horizontalLine = "____________________________________________________________\n";
+    public static String horizontalLine =
+            "____________________________________________________________\n";
 
-    static String startingLine = horizontalLine +
-            " Hello! I'm Bard.\n" +
-            " What can I do for you?\n" +
-            horizontalLine;
+    static String startingLine =
+            horizontalLine + " Hello! I'm Bard.\n" + " What can I do for you?\n" + horizontalLine;
 
     private boolean hasExited = false;
 
@@ -23,7 +22,7 @@ public class Ui {
         System.out.println(horizontalLine);
     }
 
-    public void response(String message){
+    public void response(String message) {
         System.out.println(horizontalLine + message + horizontalLine);
     }
 

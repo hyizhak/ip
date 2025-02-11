@@ -1,10 +1,9 @@
 package bard.task;
 
-import bard.exception.BardException;
-import bard.task.Task;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import bard.exception.BardException;
 
 public class TaskList implements Iterable<Task> {
 

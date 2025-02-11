@@ -1,6 +1,12 @@
 package bard.parser;
 
-import bard.command.*;
+import bard.command.AddCommand;
+import bard.command.Command;
+import bard.command.DeleteCommand;
+import bard.command.ExitCommand;
+import bard.command.InvalidCommand;
+import bard.command.ListCommand;
+import bard.command.MarkCommand;
 import bard.exception.BardException;
 import bard.task.Deadline;
 import bard.task.Event;
@@ -20,22 +26,22 @@ public class CommandParser {
         String[] words = fullCommand.split(" ");
         String command = words[0];
         switch (command) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "delete":
-                return new DeleteCommand(Integer.parseInt(words[1]));
-            case "todo":
-            case "deadline":
-            case "event":
-                return new AddCommand(createTask(fullCommand));
-            case "mark":
-                return new MarkCommand(Integer.parseInt(words[1]), true);
-            case "unmark":
-                return new MarkCommand(Integer.parseInt(words[1]), false);
-            default:
-                return new InvalidCommand();
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "delete":
+            return new DeleteCommand(Integer.parseInt(words[1]));
+        case "todo":
+        case "deadline":
+        case "event":
+            return new AddCommand(createTask(fullCommand));
+        case "mark":
+            return new MarkCommand(Integer.parseInt(words[1]), true);
+        case "unmark":
+            return new MarkCommand(Integer.parseInt(words[1]), false);
+        default:
+            return new InvalidCommand();
         }
     }
 
@@ -58,13 +64,16 @@ public class CommandParser {
         } else if (command.equals("deadline")) {
             String[] deadlineParts = parts.length > 1 ? parts[1].split(" /by ", 2) : new String[0];
             if (deadlineParts.length < 2) {
-                throw new BardException("Error: 'deadline' requires a task description and a deadline.");
+                throw new BardException(
+                        "Error: 'deadline' requires a task description and a deadline.");
             }
             task = new Deadline(deadlineParts[0], DateParser.parseHourDate(deadlineParts[1]));
         } else if (command.equals("event")) {
-            String[] eventParts = parts.length > 1 ? parts[1].split(" /from | /to ", 3) : new String[0];
+            String[] eventParts =
+                    parts.length > 1 ? parts[1].split(" /from | /to ", 3) : new String[0];
             if (eventParts.length < 3) {
-                throw new BardException("Error: 'event' requires a task description and a time range.");
+                throw new BardException(
+                        "Error: 'event' requires a task description and a time range.");
             }
             task = new Event(eventParts[0], DateParser.parseHourDate(eventParts[1]),
                     DateParser.parseHourDate(eventParts[2]));
