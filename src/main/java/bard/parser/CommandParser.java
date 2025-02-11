@@ -9,6 +9,13 @@ import bard.task.Todo;
 
 public class CommandParser {
 
+    /**
+     * Parses the full command and returns the corresponding Command object.
+     *
+     * @param fullCommand Full command string.
+     * @return Command object corresponding to the command.
+     * @throws BardException If an error occurs during parsing.
+     */
     public static Command parse(String fullCommand) throws BardException {
         String[] words = fullCommand.split(" ");
         String command = words[0];
@@ -32,6 +39,13 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Creates a Task object from the full command.
+     *
+     * @param fullCommand Full command string.
+     * @return Task object created from the command.
+     * @throws BardException If an error occurs during parsing.
+     */
     private static Task createTask(String fullCommand) throws BardException {
         String[] parts = fullCommand.split(" ", 2);
         String command = parts[0];

@@ -24,6 +24,9 @@ public class Bard {
         }
     }
 
+    /**
+     * Runs the Bard program.
+     */
     public void run() {
         while (!ui.hasExited()) {
             String fullCommand = ui.readCommand();

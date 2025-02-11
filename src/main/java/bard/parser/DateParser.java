@@ -13,6 +13,12 @@ public class DateParser {
     public static final DateTimeFormatter OUTPUT_HOUR_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
     public static final DateTimeFormatter OUTPUT_DAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
+    /**
+     * Parses a date-time string into a LocalDateTime object.
+     *
+     * @param input Date-time string to be parsed.
+     * @return LocalDateTime object representing the date-time.
+     */
     public static LocalDateTime parseHourDate(String input) {
         String[] parts = input.split(" ");
         String day, time;
@@ -70,6 +76,12 @@ public class DateParser {
         return null;
     }
 
+    /**
+     * Converts a day string to a DayOfWeek enum.
+     *
+     * @param day Day string to be converted.
+     * @return DayOfWeek enum corresponding to the day.
+     */
     private static DayOfWeek convertDayToEnum(String day) {
         return switch (day.toLowerCase()) {
             case "mon", "monday" -> DayOfWeek.MONDAY;
@@ -83,6 +95,12 @@ public class DateParser {
         };
     }
 
+    /**
+     * Finds the next occurrence of a target day.
+     * @param targetDay DayOfWeek enum representing the target day.
+     * @return LocalDate object representing the next occurrence
+     * of the target day.
+     */
     private static LocalDate getNextOccurrence(DayOfWeek targetDay) {
         LocalDate today = LocalDate.now();
         int daysUntilNext = (targetDay.getValue() - today.getDayOfWeek().getValue() + 7) % 7;
