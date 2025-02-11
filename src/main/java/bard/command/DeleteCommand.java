@@ -6,7 +6,7 @@ import bard.task.Task;
 import bard.task.TaskList;
 import bard.ui.Ui;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int index;
 
     /**
@@ -30,8 +30,7 @@ public class DeleteCommand extends Command{
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BardException {
         Task task = tasks.deleteTask(index);
         storage.save(tasks);
-        return " Noted. I've removed this task:\n"
-                + "   " + task + "\n"
-                + " Now you have " + tasks.getSize() + " tasks in the list.\n";
+        return " Noted. I've removed this task:\n" + "   " + task + "\n" + " Now you have "
+                + tasks.getSize() + " tasks in the list.\n";
     }
 }

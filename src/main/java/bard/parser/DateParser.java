@@ -8,10 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DateParser {
-    public static final DateTimeFormatter INPUT_HOUR_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    public static final DateTimeFormatter INPUT_DAY_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public static final DateTimeFormatter OUTPUT_HOUR_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
-    public static final DateTimeFormatter OUTPUT_DAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
+    public static final DateTimeFormatter INPUT_HOUR_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    public static final DateTimeFormatter INPUT_DAY_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter OUTPUT_HOUR_FORMAT =
+            DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+    public static final DateTimeFormatter OUTPUT_DAY_FORMAT =
+            DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
      * Parses a date-time string into a LocalDateTime object.
@@ -83,23 +87,34 @@ public class DateParser {
      * @return DayOfWeek enum corresponding to the day.
      */
     private static DayOfWeek convertDayToEnum(String day) {
-        return switch (day.toLowerCase()) {
-            case "mon", "monday" -> DayOfWeek.MONDAY;
-            case "tue", "tues", "tuesday" -> DayOfWeek.TUESDAY;
-            case "wed", "wednesday" -> DayOfWeek.WEDNESDAY;
-            case "thu", "thurs", "thursday" -> DayOfWeek.THURSDAY;
-            case "fri", "friday" -> DayOfWeek.FRIDAY;
-            case "sat", "saturday" -> DayOfWeek.SATURDAY;
-            case "sun", "sunday" -> DayOfWeek.SUNDAY;
-            default -> throw new IllegalArgumentException("Invalid day: " + day);
-        };
+        String lowerDay = day.toLowerCase();
+
+        if (lowerDay.equals("mon") || lowerDay.equals("monday")) {
+            return DayOfWeek.MONDAY;
+        } else if (lowerDay.equals("tue") || lowerDay.equals("tues")
+                || lowerDay.equals("tuesday")) {
+            return DayOfWeek.TUESDAY;
+        } else if (lowerDay.equals("wed") || lowerDay.equals("wednesday")) {
+            return DayOfWeek.WEDNESDAY;
+        } else if (lowerDay.equals("thu") || lowerDay.equals("thurs")
+                || lowerDay.equals("thursday")) {
+            return DayOfWeek.THURSDAY;
+        } else if (lowerDay.equals("fri") || lowerDay.equals("friday")) {
+            return DayOfWeek.FRIDAY;
+        } else if (lowerDay.equals("sat") || lowerDay.equals("saturday")) {
+            return DayOfWeek.SATURDAY;
+        } else if (lowerDay.equals("sun") || lowerDay.equals("sunday")) {
+            return DayOfWeek.SUNDAY;
+        }
+
+        throw new IllegalArgumentException("Invalid day: " + day);
     }
 
     /**
      * Finds the next occurrence of a target day.
+     *
      * @param targetDay DayOfWeek enum representing the target day.
-     * @return LocalDate object representing the next occurrence
-     * of the target day.
+     * @return LocalDate object representing the next occurrence of the target day.
      */
     private static LocalDate getNextOccurrence(DayOfWeek targetDay) {
         LocalDate today = LocalDate.now();

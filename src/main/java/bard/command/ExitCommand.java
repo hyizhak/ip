@@ -5,8 +5,7 @@ import bard.task.TaskList;
 import bard.ui.Ui;
 
 public class ExitCommand extends Command {
-    public ExitCommand() {
-    }
+    public ExitCommand() {}
 
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.setExited();

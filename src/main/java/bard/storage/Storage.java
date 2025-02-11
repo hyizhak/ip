@@ -1,21 +1,21 @@
 package bard.storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+
 import bard.exception.BardException;
 import bard.parser.DateParser;
 import bard.task.Deadline;
 import bard.task.Event;
 import bard.task.Task;
-import bard.task.Todo;
 import bard.task.TaskList;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.nio.file.Path;
-import java.util.ArrayList;
+import bard.task.Todo;
 
 public class Storage {
     private static final String FILE_PATH = Path.of("data", "tasks.txt").toString();
@@ -26,7 +26,7 @@ public class Storage {
 
     private void createFileIfNotExists() {
         File file = new File(FILE_PATH);
-//        System.out.println("Saving storage file to: " + file.getAbsolutePath());
+        // System.out.println("Saving storage file to: " + file.getAbsolutePath());
         File parentDir = file.getParentFile();
 
         try {
@@ -82,23 +82,24 @@ public class Storage {
     /** Parses a line from the file into a bard.task.Task object */
     private Task parseTask(String line) {
         String[] parts = line.split(" \\| ");
-        if (parts.length < 3) return null;
+        if (parts.length < 3)
+            return null;
 
         String type = parts[0];
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
 
         switch (type) {
-            case "T":
-                return new Todo(description, isDone);
-            case "D":
-                return new Deadline(description, DateParser.parseHourDate(parts[3]), isDone);
-            case "E":
-                String[] eventParts = parts[3].split(" - ");
-                return new Event(description, DateParser.parseHourDate(eventParts[0]),
-                        DateParser.parseHourDate(eventParts[1]), isDone);
-            default:
-                return null;
+        case "T":
+            return new Todo(description, isDone);
+        case "D":
+            return new Deadline(description, DateParser.parseHourDate(parts[3]), isDone);
+        case "E":
+            String[] eventParts = parts[3].split(" - ");
+            return new Event(description, DateParser.parseHourDate(eventParts[0]),
+                    DateParser.parseHourDate(eventParts[1]), isDone);
+        default:
+            return null;
         }
     }
 }

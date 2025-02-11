@@ -1,25 +1,20 @@
 package bard.command;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import bard.exception.BardException;
 import bard.storage.Storage;
 import bard.task.Task;
 import bard.task.TaskList;
 import bard.ui.Ui;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
-/**
- * JUnit test class for AddCommand.
- */
+/** JUnit test class for AddCommand. */
 public class AddCommandTest {
 
-    /**
-     * Dummy Task implementation for testing.
-     */
+    /** Dummy Task implementation for testing. */
     static class DummyTask extends Task {
         public DummyTask(String description) {
             super(description);
@@ -27,8 +22,7 @@ public class AddCommandTest {
     }
 
     /**
-     * Dummy TaskList implementation for testing.
-     * This implementation records tasks in an ArrayList.
+     * Dummy TaskList implementation for testing. This implementation records tasks in an ArrayList.
      */
     static class DummyTaskList extends TaskList {
         private final List<Task> tasks = new ArrayList<>();
@@ -50,16 +44,16 @@ public class AddCommandTest {
     }
 
     /**
-     * Dummy Ui implementation.
-     * In this test, the Ui is not used, so we provide an empty implementation.
+     * Dummy Ui implementation. In this test, the Ui is not used, so we provide an empty
+     * implementation.
      */
     static class DummyUi extends Ui {
         // Implement any abstract methods if necessary.
     }
 
     /**
-     * Dummy Storage implementation for testing.
-     * This implementation records the tasks passed to save().
+     * Dummy Storage implementation for testing. This implementation records the tasks passed to
+     * save().
      */
     static class DummyStorage extends Storage {
         private final List<Task> savedTasks = new ArrayList<>();
@@ -76,10 +70,8 @@ public class AddCommandTest {
     }
 
     /**
-     * Tests that executing an AddCommand
-     *  - adds the task to the TaskList,
-     *  - calls storage.save(task), and
-     *  - returns the correct message.
+     * Tests that executing an AddCommand - adds the task to the TaskList, - calls
+     * storage.save(task), and - returns the correct message.
      */
     @Test
     public void testExecuteAddsTaskAndSavesIt() throws BardException {
@@ -98,18 +90,20 @@ public class AddCommandTest {
         String result = addCommand.execute(taskList, ui, storage);
 
         // Verify that the task was added to the TaskList.
-        assertEquals(1, taskList.getSize(), "TaskList should contain 1 task after executing AddCommand.");
+        assertEquals(1, taskList.getSize(),
+                "TaskList should contain 1 task after executing AddCommand.");
 
         // Verify that Storage.save(task) was called.
         assertEquals(1, storage.getSavedTasks().size(), "Storage should have saved 1 task.");
-        assertEquals(task, storage.getSavedTasks().get(0), "The saved task should be the same as the added task.");
+        assertEquals(task, storage.getSavedTasks().get(0),
+                "The saved task should be the same as the added task.");
 
         // Construct the expected output message.
-        String expectedMessage = " Got it. I've added this task:\n"
-                + "   " + task + "\n"
+        String expectedMessage = " Got it. I've added this task:\n" + "   " + task + "\n"
                 + " Now you have " + taskList.getSize() + " tasks in the list.\n";
 
         // Verify that the returned message is exactly as expected.
-        assertEquals(expectedMessage, result, "The output message should match the expected message.");
+        assertEquals(expectedMessage, result,
+                "The output message should match the expected message.");
     }
 }
