@@ -5,17 +5,17 @@ import bard.exception.BardException;
 import bard.parser.CommandParser;
 import bard.storage.Storage;
 import bard.task.TaskList;
-import bard.ui.Ui;
+import bard.ui.TextUi;
 
 public class Bard {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private TextUi ui;
 
     public Bard() {
         storage = new Storage();
-        ui = new Ui();
+        ui = new TextUi();
         try {
             tasks = storage.load();
         } catch (BardException e) {
@@ -35,6 +35,15 @@ public class Bard {
             } catch (BardException e) {
                 ui.showErrorMessage(e.getMessage());
             }
+        }
+    }
+
+    public String getResponse(String fullCommand) {
+        try {
+            Command c = CommandParser.parse(fullCommand);
+            return c.execute(tasks, ui, storage);
+        } catch (BardException e) {
+            return e.getMessage();
         }
     }
 

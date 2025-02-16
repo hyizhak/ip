@@ -2,7 +2,7 @@ package bard.ui;
 
 import java.util.Scanner;
 
-public class Ui {
+public class TextUi {
     public static String horizontalLine =
             "____________________________________________________________\n";
 
@@ -13,7 +13,7 @@ public class Ui {
 
     private final Scanner scanner;
 
-    public Ui() {
+    public TextUi() {
         scanner = new Scanner(System.in);
         System.out.println(startingLine);
     }

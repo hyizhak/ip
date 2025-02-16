@@ -1,6 +1,6 @@
 package bard.exception;
 
-import bard.ui.Ui;
+import bard.ui.TextUi;
 
 public class BardException extends Exception {
     public BardException(String message) {
@@ -9,6 +9,6 @@ public class BardException extends Exception {
 
     @Override
     public String toString() {
-        return Ui.horizontalLine + getMessage() + "\n" + Ui.horizontalLine;
+        return TextUi.horizontalLine + getMessage() + "\n" + TextUi.horizontalLine;
     }
 }

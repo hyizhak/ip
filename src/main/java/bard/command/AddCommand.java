@@ -4,7 +4,7 @@ import bard.exception.BardException;
 import bard.storage.Storage;
 import bard.task.Task;
 import bard.task.TaskList;
-import bard.ui.Ui;
+import bard.ui.TextUi;
 
 public class AddCommand extends Command {
     private Task task;
@@ -22,12 +22,12 @@ public class AddCommand extends Command {
      * Executes the AddCommand.
      *
      * @param tasks TaskList containing all tasks.
-     * @param ui Ui object to interact with user.
+     * @param ui TextUi object to interact with user.
      * @param storage Storage object to save tasks.
      * @return String response to be displayed to user.
      * @throws BardException If an error occurs during execution.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws BardException {
+    public String execute(TaskList tasks, TextUi ui, Storage storage) throws BardException {
         tasks.addTask(task);
         storage.save(task);
         return " Got it. I've added this task:\n" + "   " + task + "\n" + " Now you have "
