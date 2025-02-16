@@ -1,0 +1,51 @@
+.root {
+    main-color: #f7f7f8;  /* Light grey background */
+    -fx-background-color: main-color;
+}
+
+.text-field {
+    -fx-background-color: #ffffff; /* White input field */
+    -fx-font: 20px "Arial";
+    -fx-border-color: #d1d1d1;
+    -fx-border-width: 1px;
+}
+
+.button {
+    -fx-background-color: #000000; /* Black send button */
+    -fx-text-fill: white;
+    -fx-font: bold 16px "Arial";
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #333333; /* Darker black for hover */
+    -fx-font-size: 18px;
+}
+
+.button:pressed {
+    -fx-background-color: #555555; /* Even darker on press */
+    -fx-font-size: 20px;
+}
+
+.scroll-pane,
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-font-size: 10px;
+    -fx-background-color: main-color;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #d1d1d1; /* Soft grey scrollbar */
+    -fx-background-radius: 1em;
+}
+
+/* Hides the increment and decrement buttons */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
