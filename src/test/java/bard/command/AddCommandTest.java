@@ -6,7 +6,8 @@ import bard.exception.BardException;
 import bard.storage.Storage;
 import bard.task.Task;
 import bard.task.TaskList;
-import bard.ui.Ui;
+import bard.ui.TextUi;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -44,10 +45,10 @@ public class AddCommandTest {
     }
 
     /**
-     * Dummy Ui implementation. In this test, the Ui is not used, so we provide an empty
+     * Dummy TextUi implementation. In this test, the TextUi is not used, so we provide an empty
      * implementation.
      */
-    static class DummyUi extends Ui {
+    static class DummyUi extends TextUi {
         // Implement any abstract methods if necessary.
     }
 
@@ -81,7 +82,7 @@ public class AddCommandTest {
         // Create the AddCommand with the dummy task.
         AddCommand addCommand = new AddCommand(task);
 
-        // Create dummy instances for TaskList, Ui, and Storage.
+        // Create dummy instances for TaskList, TextUi, and Storage.
         DummyTaskList taskList = new DummyTaskList();
         DummyUi ui = new DummyUi();
         DummyStorage storage = new DummyStorage();
