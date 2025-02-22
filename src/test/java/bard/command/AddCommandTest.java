@@ -60,6 +60,8 @@ public class AddCommandTest {
     static class DummyStorage extends Storage {
         private final List<Task> savedTasks = new ArrayList<>();
 
+        public DummyStorage() throws BardException {}
+
         @Override
         public void save(Task task) {
             savedTasks.add(task);

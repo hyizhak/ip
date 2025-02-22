@@ -52,7 +52,7 @@ public class StorageTest {
 
     /** Test that the Storage constructor creates the file if it does not exist. */
     @Test
-    public void testFileCreation() {
+    public void testFileCreation() throws BardException {
         // Ensure the file does not exist.
         if (storageFile.exists()) {
             storageFile.delete();
@@ -65,7 +65,7 @@ public class StorageTest {
 
     /** Test that saving a single task appends the correct file string. */
     @Test
-    public void testSaveTask() throws IOException {
+    public void testSaveTask() throws BardException, IOException {
         Storage storage = new Storage();
         Todo todo = new Todo("test todo", false);
         storage.save(todo);
@@ -80,7 +80,7 @@ public class StorageTest {
 
     /** Test that saving a TaskList writes all tasks correctly. */
     @Test
-    public void testSaveTaskList() throws IOException {
+    public void testSaveTaskList() throws BardException, IOException {
         Storage storage = new Storage();
 
         // Create tasks using the "yyyy-MM-dd HHmm" date format.

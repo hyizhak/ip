@@ -21,11 +21,11 @@ import bard.task.Todo;
 public class Storage {
     private static final String FILE_PATH = Path.of("data", "tasks.txt").toString();
 
-    public Storage() {
+    public Storage() throws BardException {
         createFileIfNotExists();
     }
 
-    private void createFileIfNotExists() {
+    private void createFileIfNotExists() throws BardException {
         File file = new File(FILE_PATH);
         // System.out.println("Saving storage file to: " + file.getAbsolutePath());
         File parentDir = file.getParentFile();
@@ -38,7 +38,7 @@ public class Storage {
                 file.createNewFile(); // Create file if it doesn't exist
             }
         } catch (IOException e) {
-            System.out.println("Error creating file: " + e.getMessage());
+            throw new BardException("Error creating file: " + e.getMessage());
         }
     }
 
@@ -60,24 +60,24 @@ public class Storage {
     }
 
     /** Saves all tasks to the file */
-    public void save(TaskList tasks) {
+    public void save(TaskList tasks) throws BardException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Task task : tasks) {
                 bw.write(task.toFileString());
                 bw.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
+            throw new BardException("Error writing to file: " + e.getMessage());
         }
     }
 
     /** Saves a single task to the file */
-    public void save(Task task) {
+    public void save(Task task) throws BardException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             bw.write(task.toFileString());
             bw.newLine();
         } catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
+            throw new BardException("Error writing to file: " + e.getMessage());
         }
     }
 

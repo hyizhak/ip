@@ -18,9 +18,9 @@ public class Bard {
 
     /** Constructs a Bard object. */
     public Bard() {
-        storage = new Storage();
         ui = new TextUi();
         try {
+            storage = new Storage();
             tasks = storage.load();
         } catch (BardException e) {
             ui.showLoadingError();
