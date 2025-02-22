@@ -29,6 +29,6 @@ public class FindCommand extends Command {
      */
     public String execute(TaskList tasks, TextUi ui, Storage storage) {
         TaskList matchingTasks = tasks.findTasks(keyword);
-        return "Here are the matching tasks in your list:\n" + matchingTasks.listTasks();
+        return " Here are the matching tasks in your list:\n" + matchingTasks.listTasks();
     }
 }

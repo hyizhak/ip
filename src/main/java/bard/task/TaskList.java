@@ -109,6 +109,13 @@ public class TaskList implements Iterable<Task> {
         return new TaskList(matchingTasks);
     }
 
+    /**
+     * Sorts tasks in the list chronologically based on the deadline.
+     */
+    public void sortTasks() {
+        tasks.sort((task1, task2) -> task1.compareTo(task2));
+    }
+
     @Override
     public Iterator<Task> iterator() {
         return tasks.iterator();

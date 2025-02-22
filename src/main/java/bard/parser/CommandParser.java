@@ -8,6 +8,7 @@ import bard.command.FindCommand;
 import bard.command.InvalidCommand;
 import bard.command.ListCommand;
 import bard.command.MarkCommand;
+import bard.command.SortCommand;
 import bard.exception.BardException;
 import bard.task.Deadline;
 import bard.task.Event;
@@ -36,6 +37,7 @@ public class CommandParser {
         case "mark" -> new MarkCommand(Integer.parseInt(words[1]), true);
         case "unmark" -> new MarkCommand(Integer.parseInt(words[1]), false);
         case "find" -> new FindCommand(words[1]);
+        case "sort" -> new SortCommand();
         default -> new InvalidCommand();
         };
         // spotless:on
