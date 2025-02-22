@@ -56,31 +56,38 @@ public class CommandParser {
      * @throws BardException If an error occurs during parsing.
      */
     private static Task createTask(String fullCommand) throws BardException {
+        // Split the command into the command word and its arguments.
         String[] parts = fullCommand.split(" ", 2);
-        String command = parts[0];
-        Task task = null;
-        if (command.equals("todo")) {
-            if (parts.length < 2) {
+        String command = parts[0].trim();
+
+        switch (command) {
+        case "todo":
+            if (parts.length < 2 || parts[1].trim().isEmpty()) {
                 throw new BardException("Error: 'todo' requires a task description.");
             }
-            task = new Todo(parts[1]);
-        } else if (command.equals("deadline")) {
-            String[] deadlineParts = parts.length > 1 ? parts[1].split(" /by ", 2) : new String[0];
+            return new Todo(parts[1].trim());
+        case "deadline":
+            if (parts.length < 2) {
+                throw new BardException("Error: 'deadline' requires a task description and a deadline.");
+            }
+            String[] deadlineParts = parts[1].split(" /by ", 2);
             if (deadlineParts.length < 2) {
-                throw new BardException(
-                        "Error: 'deadline' requires a task description and a deadline.");
+                throw new BardException("Error: 'deadline' requires a task description and a deadline.");
             }
-            task = new Deadline(deadlineParts[0], DateParser.parseHourDate(deadlineParts[1]));
-        } else if (command.equals("event")) {
-            String[] eventParts =
-                    parts.length > 1 ? parts[1].split(" /from | /to ", 3) : new String[0];
+            return new Deadline(deadlineParts[0].trim(), DateParser.parseHourDate(deadlineParts[1].trim()));
+        case "event":
+            if (parts.length < 2) {
+                throw new BardException("Error: 'event' requires a task description and a time range.");
+            }
+            String[] eventParts = parts[1].split(" /from | /to ", 3);
             if (eventParts.length < 3) {
-                throw new BardException(
-                        "Error: 'event' requires a task description and a time range.");
+                throw new BardException("Error: 'event' requires a task description and a time range.");
             }
-            task = new Event(eventParts[0], DateParser.parseHourDate(eventParts[1]),
-                    DateParser.parseHourDate(eventParts[2]));
+            return new Event(eventParts[0].trim(),
+                    DateParser.parseHourDate(eventParts[1].trim()),
+                    DateParser.parseHourDate(eventParts[2].trim()));
+        default:
+            throw new BardException("Error: Unknown task command '" + command + "'.");
         }
-        return task;
     }
 }

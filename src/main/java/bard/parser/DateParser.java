@@ -17,6 +17,9 @@ public class DateParser {
     public static final DateTimeFormatter OUTPUT_DAY_FORMAT =
             DateTimeFormatter.ofPattern("MMM d yyyy");
 
+    // Private constructor prevents instantiation
+    private DateParser() {}
+
     /**
      * Parses a date-time string into a LocalDateTime object.
      *
@@ -24,40 +27,41 @@ public class DateParser {
      * @return LocalDateTime object representing the date-time.
      */
     public static LocalDateTime parseHourDate(String input) {
-        String[] parts = input.split(" ");
-        String day, time;
-        if (parts.length < 2) {
-            day = parts[0]; // Extract day (e.g., "Mon", "Sunday", "yyyy-MM-dd")
-            time = "1200"; // Default time
-        } else {
-            day = parts[0]; // Extract day (e.g., "Mon", "Sunday", "yyyy-MM-dd")
-            time = parts[1]; // Extract time (e.g., "1800")
+        if (input == null || input.trim().isEmpty()) {
+            System.out.println("Input cannot be null or empty.");
+            return null;
         }
 
-        if (day.contains("-")) {
-            LocalDate date = parseDayDate(day);
+        String[] parts = input.trim().split(" ");
+        String dayPart = parts[0].trim();
+        // Use default time "1200" if no time is provided
+        String timePart = (parts.length < 2 || parts[1].trim().isEmpty()) ? "1200" : parts[1].trim();
+
+        // Parse the time part once, regardless of day format
+        LocalTime time;
+        try {
+            time = LocalTime.parse(timePart, DateTimeFormatter.ofPattern("HHmm"));
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid time format! Use HHmm (e.g., 1800 for 6 PM).");
+            return null;
+        }
+
+        LocalDate date;
+        if (dayPart.contains("-")) {
+            date = parseDayDate(dayPart);
             if (date == null) {
                 return null;
             }
-            LocalTime parsedTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
-            LocalDateTime dateTime = LocalDateTime.of(date, parsedTime);
-            return dateTime;
         } else {
             try {
-                DayOfWeek targetDay = convertDayToEnum(day);
-                LocalDate nextDay = getNextOccurrence(targetDay); // Find next "Monday" etc.
-                LocalTime parsedTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
-
-                // Combine date and time
-                LocalDateTime dateTime = LocalDateTime.of(nextDay, parsedTime);
-                return dateTime;
-            } catch (DateTimeParseException e) {
-                System.out.println("Invalid time format! Use HHmm (e.g., 1800 for 6 PM).");
+                DayOfWeek targetDay = convertDayToEnum(dayPart);
+                date = getNextOccurrence(targetDay);
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
+                return null;
             }
-            return null;
         }
+        return LocalDateTime.of(date, time);
     }
 
     public static LocalDate parseDayDate(String input) {
