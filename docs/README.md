@@ -131,4 +131,4 @@ Ensure commands follow the exact format. Extra spaces or incorrect delimiters ma
 * Enhanced error suggestions to help correct mistyped commands.
 
 --------------------------------------------------------------------------------------------------------------------
-enjoy using Bard to manage your tasks efficiently!
+Enjoy using Bard to manage your tasks efficiently!
