@@ -5,6 +5,9 @@ import java.util.Iterator;
 
 import bard.exception.BardException;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList implements Iterable<Task> {
 
     private ArrayList<Task> tasks;
@@ -32,6 +35,11 @@ public class TaskList implements Iterable<Task> {
         return tasks.size();
     }
 
+    /**
+     * Returns a list of tasks in the format of a string.
+     *
+     * @return String representation of the list of tasks.
+     */
     public String listTasks() {
         StringBuilder taskList = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -40,6 +48,13 @@ public class TaskList implements Iterable<Task> {
         return taskList.toString();
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param taskNumber Task number to be marked as done.
+     * @return Task that was marked as done.
+     * @throws BardException
+     */
     public Task markTaskAsDone(int taskNumber) throws BardException {
         if (taskNumber < 1 || taskNumber >= tasks.size() + 1) {
             throw new BardException("Error: bard.task.Task number out of range.");
@@ -48,6 +63,13 @@ public class TaskList implements Iterable<Task> {
         return tasks.get(taskNumber - 1);
     }
 
+    /**
+     * Unmarks a task as done.
+     *
+     * @param taskNumber Task number to be unmarked as done.
+     * @return Task that was unmarked as done.
+     * @throws BardException
+     */
     public Task unmarkTaskAsDone(int taskNumber) throws BardException {
         if (taskNumber < 1 || taskNumber >= tasks.size() + 1) {
             throw new BardException("Error: bard.task.Task number out of range.");
@@ -56,6 +78,13 @@ public class TaskList implements Iterable<Task> {
         return tasks.get(taskNumber - 1);
     }
 
+    /**
+     * Deletes a task.
+     *
+     * @param taskNumber Task number to be deleted.
+     * @return Task that was deleted.
+     * @throws BardException
+     */
     public Task deleteTask(int taskNumber) throws BardException {
         if (taskNumber < 1 || taskNumber >= tasks.size() + 1) {
             throw new BardException("Error: bard.task.Task number out of range.");
@@ -64,6 +93,12 @@ public class TaskList implements Iterable<Task> {
         return task;
     }
 
+    /**
+     * Finds tasks that contain a keyword.
+     *
+     * @param keyword Keyword to search for in tasks.
+     * @return TaskList containing tasks that contain the keyword.
+     */
     public TaskList findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {

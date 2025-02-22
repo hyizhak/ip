@@ -4,6 +4,9 @@ import bard.storage.Storage;
 import bard.task.TaskList;
 import bard.ui.TextUi;
 
+/**
+ * Represents a command to list all tasks.
+ */
 public class ListCommand extends Command {
     public ListCommand() {}
 

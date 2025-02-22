@@ -1,14 +1,28 @@
 package bard.task;
 
+/**
+ * Represents a task with a description and a status of whether it is done.
+ */
 public class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Constructor for Task.
+     *
+     * @param description Description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task.
+     *
+     * @param description Description of task.
+     * @param isDone Whether the task is done.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

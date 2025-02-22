@@ -2,24 +2,30 @@ package bard.ui;
 
 import java.util.Scanner;
 
+/**
+ * TextUi class handles the user interface of the application.
+ */
 public class TextUi {
-    public static String horizontalLine =
+    private static String horizontalLine =
             "____________________________________________________________\n";
 
-    static String startingLine =
+    private static String startingLine =
             horizontalLine + " Hello! I'm Bard.\n" + " What can I do for you?\n" + horizontalLine;
 
     private boolean hasExited = false;
 
     private final Scanner scanner;
 
+    /**
+     * Constructor for TextUi class.
+     */
     public TextUi() {
         scanner = new Scanner(System.in);
         System.out.println(startingLine);
     }
 
-    public void showLine() {
-        System.out.println(horizontalLine);
+    public static String getHorizontalLine() {
+        return horizontalLine;
     }
 
     public void response(String message) {

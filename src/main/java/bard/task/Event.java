@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import bard.parser.DateParser;
 
+/**
+ * Represents an event.
+ */
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
@@ -21,6 +24,14 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description Description of event.
+     * @param from Start time of event.
+     * @param to End time of event.
+     * @param isDone Whether the event is done.
+     */
     public Event(String description, LocalDateTime from, LocalDateTime to, boolean isDone) {
         super(description, isDone);
         this.from = from;
@@ -33,6 +44,7 @@ public class Event extends Task {
                 + " to: " + to.format(DateParser.OUTPUT_HOUR_FORMAT) + ")";
     }
 
+    @Override
     public String toFileString() {
         return "E | " + super.toFileString() + " | " + from.format(DateParser.INPUT_HOUR_FORMAT)
                 + " - " + to.format(DateParser.INPUT_HOUR_FORMAT);

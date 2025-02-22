@@ -5,6 +5,9 @@ import bard.storage.Storage;
 import bard.task.TaskList;
 import bard.ui.TextUi;
 
+/**
+ * Represents a command to be executed
+ */
 public abstract class Command {
 
     /**

@@ -1,16 +1,17 @@
 package bard.command;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import bard.exception.BardException;
 import bard.storage.Storage;
 import bard.task.Task;
 import bard.task.TaskList;
 import bard.ui.TextUi;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.Test;
 
 /** JUnit test class for AddCommand. */
 public class AddCommandTest {

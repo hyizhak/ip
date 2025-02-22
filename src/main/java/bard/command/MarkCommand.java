@@ -6,6 +6,9 @@ import bard.task.Task;
 import bard.task.TaskList;
 import bard.ui.TextUi;
 
+/**
+ * Represents a command to mark or unmark a task as done.
+ */
 public class MarkCommand extends Command {
     private int index;
     private boolean isMarkedDone;
