@@ -5,6 +5,7 @@ import bard.command.Command;
 import bard.command.DeleteCommand;
 import bard.command.ExitCommand;
 import bard.command.FindCommand;
+import bard.command.HelpCommand;
 import bard.command.InvalidCommand;
 import bard.command.ListCommand;
 import bard.command.MarkCommand;
@@ -38,6 +39,7 @@ public class CommandParser {
         case "unmark" -> new MarkCommand(Integer.parseInt(words[1]), false);
         case "find" -> new FindCommand(words[1]);
         case "sort" -> new SortCommand();
+        case "help" -> new HelpCommand();
         default -> new InvalidCommand();
         };
         // spotless:on
