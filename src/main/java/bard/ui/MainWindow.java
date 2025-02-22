@@ -48,10 +48,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = bard.getResponse(input);
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBardDialog(response, bardImage));
+        try {
+            String response = bard.getResponse(input);
+            dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getBardDialog(response, bardImage));
+        } catch (Exception e) {
+            dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getErrorDialog(e.getMessage(), bardImage));
+        }
+
         userInput.clear();
+
 
         // Check if the exit flag has been set by an ExitCommand
         if (bard.hasExited()) {
