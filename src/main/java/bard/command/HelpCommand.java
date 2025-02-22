@@ -33,6 +33,6 @@ public class HelpCommand extends Command {
                 + "6. delete <task number> - Deletes a task.\n"
                 + "7. find <keyword> - Finds tasks with the keyword.\n"
                 + "8. sort - Sorts all tasks by deadline.\n" + "9. bye - Exits the program.\n"
-                + "For more information, visit: \n";
+                + "For more information, visit: https://hyizhak.github.io/ip/\n";
     }
 }
