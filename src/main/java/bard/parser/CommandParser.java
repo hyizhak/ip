@@ -49,6 +49,7 @@ public class CommandParser {
         // Split the command into the command word and its arguments.
         String[] parts = fullCommand.split(" ", 2);
         String command = parts[0].trim();
+        assert parts.length > 0 : "Add-task-command should not be empty";
 
         switch (command) {
         case "todo":
