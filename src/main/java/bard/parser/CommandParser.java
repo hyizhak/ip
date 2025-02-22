@@ -26,26 +26,16 @@ public class CommandParser {
     public static Command parse(String fullCommand) throws BardException {
         String[] words = fullCommand.split(" ");
         String command = words[0];
-        switch (command) {
-        case "bye":
-            return new ExitCommand();
-        case "list":
-            return new ListCommand();
-        case "delete":
-            return new DeleteCommand(Integer.parseInt(words[1]));
-        case "todo":
-        case "deadline":
-        case "event":
-            return new AddCommand(createTask(fullCommand));
-        case "mark":
-            return new MarkCommand(Integer.parseInt(words[1]), true);
-        case "unmark":
-            return new MarkCommand(Integer.parseInt(words[1]), false);
-        case "find":
-            return new FindCommand(words[1]);
-        default:
-            return new InvalidCommand();
-        }
+        return switch (command) {
+            case "bye" -> new ExitCommand();
+            case "list" -> new ListCommand();
+            case "delete" -> new DeleteCommand(Integer.parseInt(words[1]));
+            case "todo", "deadline", "event" -> new AddCommand(createTask(fullCommand));
+            case "mark" -> new MarkCommand(Integer.parseInt(words[1]), true);
+            case "unmark" -> new MarkCommand(Integer.parseInt(words[1]), false);
+            case "find" -> new FindCommand(words[1]);
+            default -> new InvalidCommand();
+        };
     }
 
     /**
