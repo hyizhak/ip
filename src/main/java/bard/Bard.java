@@ -39,12 +39,18 @@ public class Bard {
     }
 
     public String getResponse(String fullCommand) {
+        assert !hasExited() : "Program should not have exited";
         try {
+            assert fullCommand != null : "Input should not be null";
             Command c = CommandParser.parse(fullCommand);
             return c.execute(tasks, ui, storage);
         } catch (BardException e) {
             return e.getMessage();
         }
+    }
+
+    public boolean hasExited() {
+        return ui.hasExited();
     }
 
     public static void main(String[] args) {
