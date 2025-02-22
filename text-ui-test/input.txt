@@ -1,5 +1,8 @@
 todo borrow book
 deadline return book /by 2019-10-15
+deadline read book /by 2019-10-12
+deadline review book /by 2019-10-13
+sort
 event project meeting /from Mon 1400 /to Mon 1600
 find book
 mark 1
@@ -7,5 +10,5 @@ mark 2
 unmark 2
 list
 delete 3
-list
+sort
 bye
