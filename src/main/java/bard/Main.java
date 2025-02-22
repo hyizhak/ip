@@ -23,14 +23,15 @@ public class Main extends Application {
             // Set the window title.
             stage.setTitle("Bard");
 
-            Image icon = new Image(getClass().getResourceAsStream("/images/Bard_circular_icon.png"));
+            Image icon =
+                    new Image(getClass().getResourceAsStream("/images/Bard_circular_icon.png"));
             stage.getIcons().add(icon);
 
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setBard(bard);  // inject the Bard instance
+            fxmlLoader.<MainWindow>getController().setBard(bard); // inject the Bard instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

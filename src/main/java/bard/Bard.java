@@ -7,12 +7,16 @@ import bard.storage.Storage;
 import bard.task.TaskList;
 import bard.ui.TextUi;
 
+/**
+ * Bard is a personal assistant chatbot that helps users keep track of various tasks.
+ */
 public class Bard {
 
     private Storage storage;
     private TaskList tasks;
     private TextUi ui;
 
+    /** Constructs a Bard object. */
     public Bard() {
         storage = new Storage();
         ui = new TextUi();

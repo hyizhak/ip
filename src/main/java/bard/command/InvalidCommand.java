@@ -4,6 +4,9 @@ import bard.storage.Storage;
 import bard.task.TaskList;
 import bard.ui.TextUi;
 
+/**
+ * Represents an invalid command.
+ */
 public class InvalidCommand extends Command {
     public InvalidCommand() {}
 

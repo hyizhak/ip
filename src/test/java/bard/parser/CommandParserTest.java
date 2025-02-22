@@ -1,16 +1,27 @@
 package bard.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import bard.command.*;
+import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import bard.command.AddCommand;
+import bard.command.Command;
+import bard.command.DeleteCommand;
+import bard.command.ExitCommand;
+import bard.command.InvalidCommand;
+import bard.command.ListCommand;
+import bard.command.MarkCommand;
 import bard.exception.BardException;
 import bard.task.Deadline;
 import bard.task.Event;
 import bard.task.Task;
 import bard.task.Todo;
-import java.lang.reflect.Field;
-import java.time.LocalDateTime;
-import org.junit.jupiter.api.Test;
 
 /** Test suite for the CommandParser class. */
 public class CommandParserTest {
@@ -171,8 +182,10 @@ public class CommandParserTest {
 
     @Test
     public void testDeadlineWithoutProperFormatThrowsException() {
-        BardException exception = assertThrows(BardException.class,
-                () -> CommandParser.parse("deadline submit report"));
+        // spotless:off
+        BardException exception =
+                assertThrows(BardException.class, () -> CommandParser.parse("deadline submit report"));
+        // spotless:on
         assertEquals("Error: 'deadline' requires a task description and a deadline.",
                 exception.getMessage(),
                 "A 'deadline' command without proper '/by' format should throw the correct exception.");
@@ -180,8 +193,10 @@ public class CommandParserTest {
 
     @Test
     public void testEventWithoutProperFormatThrowsException() {
-        BardException exception = assertThrows(BardException.class,
-                () -> CommandParser.parse("event meeting /from 2025-12-31T10:00"));
+        // spotless:off
+        BardException exception =
+                assertThrows(BardException.class, () -> CommandParser.parse("event meeting /from 2025-12-31T10:00"));
+        // spotless:on
         assertEquals("Error: 'event' requires a task description and a time range.",
                 exception.getMessage(),
                 "An 'event' command without proper '/from' and '/to' segments should throw the correct exception.");

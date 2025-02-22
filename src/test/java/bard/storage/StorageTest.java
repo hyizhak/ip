@@ -1,6 +1,19 @@
 package bard.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import bard.exception.BardException;
 import bard.parser.DateParser;
@@ -9,14 +22,6 @@ import bard.task.Event;
 import bard.task.Task;
 import bard.task.TaskList;
 import bard.task.Todo;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.*;
 
 /**
  * JUnit test class for the Storage class.
@@ -143,7 +148,7 @@ public class StorageTest {
      * Helper method to extract the private 'tasks' field from a TaskList instance using reflection.
      *
      * @param taskList the TaskList instance from which to retrieve the tasks
-     * @return the ArrayList<Task> stored within the TaskList
+     * @return the ArrayList stored within the TaskList
      * @throws ReflectiveOperationException if reflection fails
      */
     @SuppressWarnings("unchecked")

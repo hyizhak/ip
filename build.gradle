@@ -54,6 +54,7 @@ spotless {
         trimTrailingWhitespace()
         leadingTabsToSpaces()
         endWithNewline()
+        toggleOffOn()
     }
 }
 

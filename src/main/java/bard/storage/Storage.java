@@ -17,6 +17,7 @@ import bard.task.Task;
 import bard.task.TaskList;
 import bard.task.Todo;
 
+/** Handles loading and saving of tasks to a file */
 public class Storage {
     private static final String FILE_PATH = Path.of("data", "tasks.txt").toString();
 
@@ -70,6 +71,7 @@ public class Storage {
         }
     }
 
+    /** Saves a single task to the file */
     public void save(Task task) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             bw.write(task.toFileString());
@@ -82,8 +84,9 @@ public class Storage {
     /** Parses a line from the file into a bard.task.Task object */
     private Task parseTask(String line) {
         String[] parts = line.split(" \\| ");
-        if (parts.length < 3)
+        if (parts.length < 3) {
             return null;
+        }
 
         String type = parts[0];
         boolean isDone = parts[1].equals("1");

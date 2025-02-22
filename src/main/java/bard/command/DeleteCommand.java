@@ -6,6 +6,9 @@ import bard.task.Task;
 import bard.task.TaskList;
 import bard.ui.TextUi;
 
+/**
+ * Represents a command to delete a task.
+ */
 public class DeleteCommand extends Command {
     private int index;
 

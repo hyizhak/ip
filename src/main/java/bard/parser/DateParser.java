@@ -7,6 +7,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses date-time strings into LocalDateTime objects.
+ */
 public class DateParser {
     public static final DateTimeFormatter INPUT_HOUR_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -35,7 +38,9 @@ public class DateParser {
         String[] parts = input.trim().split(" ");
         String dayPart = parts[0].trim();
         // Use default time "1200" if no time is provided
+        // spotless:off
         String timePart = (parts.length < 2 || parts[1].trim().isEmpty()) ? "1200" : parts[1].trim();
+        // spotless:on
 
         // Parse the time part once, regardless of day format
         LocalTime time;
@@ -64,6 +69,12 @@ public class DateParser {
         return LocalDateTime.of(date, time);
     }
 
+    /**
+     * Parses a date string into a LocalDate object.
+     *
+     * @param input Date string to be parsed.
+     * @return LocalDate object representing the date.
+     */
     public static LocalDate parseDayDate(String input) {
         if (input.contains("-")) {
             try {
@@ -91,27 +102,20 @@ public class DateParser {
      * @return DayOfWeek enum corresponding to the day.
      */
     private static DayOfWeek convertDayToEnum(String day) {
+        // spotless:off
         String lowerDay = day.toLowerCase();
 
-        if (lowerDay.equals("mon") || lowerDay.equals("monday")) {
-            return DayOfWeek.MONDAY;
-        } else if (lowerDay.equals("tue") || lowerDay.equals("tues")
-                || lowerDay.equals("tuesday")) {
-            return DayOfWeek.TUESDAY;
-        } else if (lowerDay.equals("wed") || lowerDay.equals("wednesday")) {
-            return DayOfWeek.WEDNESDAY;
-        } else if (lowerDay.equals("thu") || lowerDay.equals("thurs")
-                || lowerDay.equals("thursday")) {
-            return DayOfWeek.THURSDAY;
-        } else if (lowerDay.equals("fri") || lowerDay.equals("friday")) {
-            return DayOfWeek.FRIDAY;
-        } else if (lowerDay.equals("sat") || lowerDay.equals("saturday")) {
-            return DayOfWeek.SATURDAY;
-        } else if (lowerDay.equals("sun") || lowerDay.equals("sunday")) {
-            return DayOfWeek.SUNDAY;
-        }
-
-        throw new IllegalArgumentException("Invalid day: " + day);
+        return switch (lowerDay) {
+        case "mon", "monday" -> DayOfWeek.MONDAY;
+        case "tue", "tues", "tuesday" -> DayOfWeek.TUESDAY;
+        case "wed", "wednesday" -> DayOfWeek.WEDNESDAY;
+        case "thu", "thurs", "thursday" -> DayOfWeek.THURSDAY;
+        case "fri", "friday" -> DayOfWeek.FRIDAY;
+        case "sat", "saturday" -> DayOfWeek.SATURDAY;
+        case "sun", "sunday" -> DayOfWeek.SUNDAY;
+        default -> throw new IllegalArgumentException("Invalid day: " + day);
+        };
+        // spotless:on
     }
 
     /**

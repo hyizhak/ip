@@ -6,6 +6,9 @@ import bard.task.Task;
 import bard.task.TaskList;
 import bard.ui.TextUi;
 
+/**
+ * Represents a command to add a task.
+ */
 public class AddCommand extends Command {
     private Task task;
 
