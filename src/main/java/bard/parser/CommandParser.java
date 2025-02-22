@@ -57,6 +57,7 @@ public class CommandParser {
      */
     private static Task createTask(String fullCommand) throws BardException {
         String[] parts = fullCommand.split(" ", 2);
+        assert parts.length > 0 : "Add-task-command should not be empty";
         String command = parts[0];
         Task task = null;
         if (command.equals("todo")) {
@@ -81,6 +82,7 @@ public class CommandParser {
             task = new Event(eventParts[0], DateParser.parseHourDate(eventParts[1]),
                     DateParser.parseHourDate(eventParts[2]));
         }
+        assert task != null : "Task should not be null";
         return task;
     }
 }

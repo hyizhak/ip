@@ -1,6 +1,8 @@
 package bard.ui;
 
 import bard.Bard;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 /**
  * Controller for the main GUI.
  */
@@ -49,5 +53,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getBardDialog(response, bardImage)
         );
         userInput.clear();
+
+        // Check if the exit flag has been set by an ExitCommand
+        if (bard.hasExited()) {
+            // Use a delay to let the UI show the goodbye message
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished(event -> {
+                Platform.exit();  // Gracefully shuts down JavaFX
+                System.exit(0);   // Ensures the JVM terminates
+            });
+            delay.play();
+        }
     }
 }
