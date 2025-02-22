@@ -1,9 +1,4 @@
----
-layout: page
-title: Bard User Guide
----
-
-# Bard: Task Noting Chatbot
+# Bard User Guide
 
 Bard is a **desktop chatbot for managing your tasks**. With a conversational interface and an elegant GUI, Bard lets you quickly add, update, and manage your tasks through simple commands. Whether you need to jot down a quick todo, schedule a deadline, or plan an event, Bard is designed to make task management efficient and enjoyable.
 
