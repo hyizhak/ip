@@ -1,6 +1,6 @@
-# Duke project template
+# Project template
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Bard is based on a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use the template `commit 33ea7802dbb84985b5cbd2a8c7d78d92826e21c3`.
 
 ## Setting up in Intellij
 
