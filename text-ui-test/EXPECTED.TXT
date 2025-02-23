@@ -1,6 +1,19 @@
 ____________________________________________________________
- Hello! I'm Bard.
- What can I do for you?
+Hi! What can I do for you today? If you need help, type 'help'.
+____________________________________________________________
+
+____________________________________________________________
+ Here are the commands you can use:
+1. todo <description> - Adds a todo task.
+2. deadline <description> /by <date> - Adds a deadline task.
+3. event <description> /at <date> - Adds an event task.
+4. list - Lists all tasks.
+5. (un)mark <task number> - Marks a task as (not) done.
+6. delete <task number> - Deletes a task.
+7. find <keyword> - Finds tasks with the keyword.
+8. sort - Sorts all tasks by deadline.
+9. bye - Exits the program.
+For more information, visit: https://hyizhak.github.io/ip/
 ____________________________________________________________
 
 ____________________________________________________________

@@ -24,7 +24,7 @@ public class HelpCommand extends Command {
      * @throws BardException If an error occurs during execution.
      */
     public String execute(TaskList tasks, TextUi ui, Storage storage) throws BardException {
-        return "Here are the commands you can use:\n"
+        return " Here are the commands you can use:\n"
                 + "1. todo <description> - Adds a todo task.\n"
                 + "2. deadline <description> /by <date> - Adds a deadline task.\n"
                 + "3. event <description> /at <date> - Adds an event task.\n"
