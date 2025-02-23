@@ -21,7 +21,6 @@ public class TextUi {
      */
     public TextUi() {
         scanner = new Scanner(System.in);
-        System.out.println(startingLine);
     }
 
     public static String getHorizontalLine() {

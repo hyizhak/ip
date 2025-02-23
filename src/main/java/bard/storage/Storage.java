@@ -82,7 +82,7 @@ public class Storage {
     }
 
     /** Parses a line from the file into a bard.task.Task object */
-    private Task parseTask(String line) {
+    private Task parseTask(String line) throws BardException {
         String[] parts = line.split(" \\| ");
         if (parts.length < 3) {
             return null;

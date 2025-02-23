@@ -7,6 +7,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import bard.exception.BardException;
+
 /**
  * Parses date-time strings into LocalDateTime objects.
  */
@@ -29,12 +31,7 @@ public class DateParser {
      * @param input Date-time string to be parsed.
      * @return LocalDateTime object representing the date-time.
      */
-    public static LocalDateTime parseHourDate(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            System.out.println("Input cannot be null or empty.");
-            return null;
-        }
-
+    public static LocalDateTime parseHourDate(String input) throws BardException {
         String[] parts = input.trim().split(" ");
         String dayPart = parts[0].trim();
         // Use default time "1200" if no time is provided
@@ -47,8 +44,7 @@ public class DateParser {
         try {
             time = LocalTime.parse(timePart, DateTimeFormatter.ofPattern("HHmm"));
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid time format! Use HHmm (e.g., 1800 for 6 PM).");
-            return null;
+            throw new BardException("Invalid time format! Use HHmm (e.g., 1800 for 6 PM).");
         }
 
         LocalDate date;
@@ -62,8 +58,7 @@ public class DateParser {
                 DayOfWeek targetDay = convertDayToEnum(dayPart);
                 date = getNextOccurrence(targetDay);
             } catch (IllegalArgumentException e) {
-                System.out.println("Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
-                return null;
+                throw new BardException("Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
             }
         }
         return LocalDateTime.of(date, time);
@@ -75,13 +70,13 @@ public class DateParser {
      * @param input Date string to be parsed.
      * @return LocalDate object representing the date.
      */
-    public static LocalDate parseDayDate(String input) {
+    public static LocalDate parseDayDate(String input) throws BardException {
         if (input.contains("-")) {
             try {
                 LocalDate date = LocalDate.parse(input, INPUT_DAY_FORMAT);
                 return date;
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date format! Use yyyy-MM-dd (e.g., 2021-12-31).");
+                throw new BardException("Invalid date format! Use yyyy-MM-dd (e.g., 2021-12-31).");
             }
         } else {
             try {
@@ -89,10 +84,9 @@ public class DateParser {
                 LocalDate nextDay = getNextOccurrence(targetDay); // Find next "Monday" etc.
                 return nextDay;
             } catch (IllegalArgumentException e) {
-                System.out.println("Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
+                throw new BardException("Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
             }
         }
-        return null;
     }
 
     /**
