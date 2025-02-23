@@ -32,8 +32,8 @@ public class CommandParser {
         String command = words[0];
 
         // For commands that require a second word, ensure it exists.
-        if ((command.equals("delete") || command.equals("mark") ||
-                command.equals("unmark") || command.equals("find"))
+        if ((command.equals("delete") || command.equals("mark")
+                || command.equals("unmark") || command.equals("find"))
                 && words.length < 2) {
             throw new BardException("Command '" + command + "' requires an additional argument.");
         }
@@ -74,25 +74,21 @@ public class CommandParser {
             return new Todo(parts[1].trim());
         case "deadline":
             if (parts.length < 2) {
-                throw new BardException(
-                        "'deadline' requires a task description and a deadline.");
+                throw new BardException("'deadline' requires a task description and a deadline.");
             }
             String[] deadlineParts = parts[1].split(" /by ", 2);
             if (deadlineParts.length < 2) {
-                throw new BardException(
-                        "'deadline' requires a task description and a deadline.");
+                throw new BardException("'deadline' requires a task description and a deadline.");
             }
             return new Deadline(deadlineParts[0].trim(),
                     DateParser.parseHourDate(deadlineParts[1].trim()));
         case "event":
             if (parts.length < 2) {
-                throw new BardException(
-                        "'event' requires a task description and a time range.");
+                throw new BardException("'event' requires a task description and a time range.");
             }
             String[] eventParts = parts[1].split(" /from | /to ", 3);
             if (eventParts.length < 3) {
-                throw new BardException(
-                        "'event' requires a task description and a time range.");
+                throw new BardException("'event' requires a task description and a time range.");
             }
             return new Event(eventParts[0].trim(), DateParser.parseHourDate(eventParts[1].trim()),
                     DateParser.parseHourDate(eventParts[2].trim()));

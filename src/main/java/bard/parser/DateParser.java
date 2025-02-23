@@ -44,7 +44,8 @@ public class DateParser {
         try {
             time = LocalTime.parse(timePart, DateTimeFormatter.ofPattern("HHmm"));
         } catch (DateTimeParseException e) {
-            throw new BardException("Invalid time format! Use HHmm (e.g., 1800 for 6 PM).");
+            throw new BardException("Invalid day or time format! "
+                    + "Use yyyy-MM-dd (e.g., 2021-12-31) and HHmm (e.g., 1800 for 6 PM).");
         }
 
         LocalDate date;
@@ -58,7 +59,8 @@ public class DateParser {
                 DayOfWeek targetDay = convertDayToEnum(dayPart);
                 date = getNextOccurrence(targetDay);
             } catch (IllegalArgumentException e) {
-                throw new BardException("Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
+                throw new BardException(
+                        "Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
             }
         }
         return LocalDateTime.of(date, time);
@@ -84,7 +86,8 @@ public class DateParser {
                 LocalDate nextDay = getNextOccurrence(targetDay); // Find next "Monday" etc.
                 return nextDay;
             } catch (IllegalArgumentException e) {
-                throw new BardException("Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
+                throw new BardException(
+                        "Invalid day format! Use a valid weekday (e.g., Mon, Sunday).");
             }
         }
     }

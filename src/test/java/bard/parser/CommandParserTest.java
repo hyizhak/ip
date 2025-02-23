@@ -176,7 +176,7 @@ public class CommandParserTest {
     public void testTodoWithoutDescriptionThrowsException() {
         BardException exception =
                 assertThrows(BardException.class, () -> CommandParser.parse("todo"));
-        assertEquals("Error: 'todo' requires a task description.", exception.getMessage(),
+        assertEquals("'todo' requires a task description.", exception.getMessage(),
                 "A 'todo' command without a description should throw the correct exception.");
     }
 
@@ -186,7 +186,7 @@ public class CommandParserTest {
         BardException exception =
                 assertThrows(BardException.class, () -> CommandParser.parse("deadline submit report"));
         // spotless:on
-        assertEquals("Error: 'deadline' requires a task description and a deadline.",
+        assertEquals("'deadline' requires a task description and a deadline.",
                 exception.getMessage(),
                 "A 'deadline' command without proper '/by' format should throw the correct exception.");
     }
@@ -197,7 +197,7 @@ public class CommandParserTest {
         BardException exception =
                 assertThrows(BardException.class, () -> CommandParser.parse("event meeting /from 2025-12-31T10:00"));
         // spotless:on
-        assertEquals("Error: 'event' requires a task description and a time range.",
+        assertEquals("'event' requires a task description and a time range.",
                 exception.getMessage(),
                 "An 'event' command without proper '/from' and '/to' segments should throw the correct exception.");
     }
